@@ -17,6 +17,7 @@ df = cbind(data.frame(name, x, treatment, y0 , y1 , ce_ind, y1-x, y0-x))
 ce_avg = mean(ce_ind)
 ce_avg     
 
+
 ## - Calculate the *true* causal effect for men and for women
 ce_avg_treated = mean(df$y1...x[treatment==1])
 ce_avg_untreated = mean(df$y0...x[treatment==0])

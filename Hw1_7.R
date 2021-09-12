@@ -29,11 +29,8 @@ Yobs <- Z * Y1 + (1 - Z) * Y0 # Observed potential outcomes Y(Z)
 
 quiz_obs <- data.frame(X, Z, Yobs)
 
-treated <- mean((quiz_obs$Yobs - quiz_obs$X)[quiz_obs$Z == 1])
-untreated <- mean((quiz_obs$Yobs - quiz_obs$X)[quiz_obs$Z == 0])
-
 treated <- mean((quiz_obs$Yobs[quiz_obs$Z == 1] - quiz_obs$X[quiz_obs$Z == 1]))
 untreated <- mean((quiz_obs$Yobs[quiz_obs$Z == 0] - quiz_obs$X[quiz_obs$Z == 0]))
 diff <- treated - untreated
 
-t <- (tau - (treated - untreated)) / sd(Yobs)
+t <- (tau - diff) / sd(Yobs)
