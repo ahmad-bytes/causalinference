@@ -21,6 +21,8 @@ Y0 <- 10 + 0.9 * X + 0 + e0
 
 Y1 <- 10 + 0.9 * X + tau + e1
 
+set.seed(2021)
+
 Z <- sample(c(1,0), size = N, replace = TRUE) # Generate random treatment assignments
 
 Yobs <- Z * Y1 + (1 - Z) * Y0 # Observed potential outcomes Y(Z)
@@ -34,3 +36,14 @@ untreated <- mean((quiz_obs$Yobs[quiz_obs$Z == 0] - quiz_obs$X[quiz_obs$Z == 0])
 diff <- treated - untreated
 
 t <- (tau - diff) / sd(Yobs)
+
+
+treated1 <- sum((quiz_obs$Yobs - quiz_obs$X)[quiz_obs$Z == 1]) / 513
+untreated1 <- sum((quiz_obs$Yobs - quiz_obs$X)[quiz_obs$Z == 0]) / 487
+diff1 <- treated1 - untreated1
+
+treated2 <- mean(quiz_obs$Yobs[quiz_obs$Z == 1])
+untreated2 <- mean(quiz_obs$Yobs[quiz_obs$Z == 0])
+diff2 <- treated2 - untreated2
+
+t2 <- (tau - diff2) / sd(Yobs)
