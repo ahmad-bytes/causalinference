@@ -41,7 +41,7 @@ t <- (tau - diff) / sd(Yobs)
 treated1 <- sum((quiz_obs$Yobs - quiz_obs$X)[quiz_obs$Z == 1]) / 513
 untreated1 <- sum((quiz_obs$Yobs - quiz_obs$X)[quiz_obs$Z == 0]) / 487
 diff1 <- treated1 - untreated1
-
+# do not use gain score
 treated2 <- mean(quiz_obs$Yobs[quiz_obs$Z == 1])
 untreated2 <- mean(quiz_obs$Yobs[quiz_obs$Z == 0])
 diff2 <- treated2 - untreated2
