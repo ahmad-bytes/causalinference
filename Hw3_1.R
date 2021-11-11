@@ -113,7 +113,9 @@ quantile(y_pred, c(.95, .98, 1))
 
 
 #' #### Summarize predictions graphically
-hist(y_pred)
+hist(sims[,2])
+
+#length(which(sims[,2] >= 0))
 
 
 

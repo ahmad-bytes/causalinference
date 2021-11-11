@@ -41,7 +41,19 @@ print(mad(b))
 #' #### Predictions
 new <- data.frame(Temperature=c(70,65))
 #' Expected outcome with uncertainty
-epred <- posterior_epred(fit_1, newdata=new)
-head(epred)
-print(c(mean(epred[2])-mean(epred[1])), c(sd(epred[2])-sd(epred[1]), digits=2)
+postpred <- posterior_predict(fit_1, newdata=new)
+head(postpred)
+mean(postpred[,2] - postpred[,1])
+sd(postpred[,2] - postpred[,1])
 
+
+#' the posterior probability, according to the fitted model, that Bush
+#' was more popular among people with income level 5 than among people
+#' with income level 4
+#mean(epred[,5] > epred[,4])
+
+invlogit(-0.99)
+
+invlogit(-0.99 + 0.5 * 6)
+
+exp(-0.2)
