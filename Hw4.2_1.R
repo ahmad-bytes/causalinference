@@ -19,8 +19,10 @@ lm(re78 ~ treat, data =  Lalonde_df)
 
 #x = Lalonde_df[Lalonde_df$treat == 0,]
 
-lm(re78 ~ treat + age + black + hisp + married + educ  , data =  Lalonde_df)
-lm(re74 ~ treat + age + black + hisp + married + educ  , data =  Lalonde_df)
+lm(re78 ~ treat + age + married + educ_cat4 + educ + nodegree , data =  Lalonde_df)
+
+lm(re74 ~ treat + age + black + hisp + married + educ   , data =  Lalonde_df)
+
 lm(re75 ~ treat + age + black + hisp + married + educ  , data =  Lalonde_df)
 
 hist(Lalonde_df[Lalonde_df$treat == 0,]$re74, xlim=c(0,80000), ylim=c(0,7000))

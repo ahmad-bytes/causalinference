@@ -30,3 +30,12 @@ prob_control <- 1/(1 + exp(-(intercept + treatment_coeff * all_control + age_coe
 denominator = mean(prob_control) / mean(1-prob_control)
 
 numerator/ denominator
+
+obs_df = data.frame(cbind(Yobs = invlogit(intercept + treatment_coeff*age_data$Z + age_coeff * age_data$age), Z=age_data$Z))
+
+mean(obs_df$Yobs[obs_df$Z == 1 ]) - mean(obs_df$Yobs[obs_df$Z == 0])
+
+
+
+
+

@@ -39,9 +39,8 @@ interaction_coeff = fit_1$coefficients[4]
 par(mfrow=c(1,1))
 #plot(age_data$age  + rnorm(N, sd=0.1), age_data$Y + rnorm(N, sd=0.1), main="Jittered x-axis (normal distr.)", xlab="Integer", ylab="Continuous")
 plot(age_data$age + rnorm(N, sd=0.1) , age_data$Y + rnorm(N, sd=0.1)  , main="Jittered x-axis (normal distr.)", xlab="Integer", ylab="Continuous")
-curve(invlogit(intercept + treatment_coeff + age_coeff*x), add=TRUE)
-curve(invlogit(intercept + interaction_coeff*x + age_coeff*x), add=TRUE)
+curve(invlogit(intercept + treatment_coeff + age_coeff*x + interaction_coeff * x), add=TRUE)
+curve(invlogit(intercept + age_coeff*x), add=TRUE)
 
 invlogit(intercept + treatment_coeff + age_coeff*mean(age_data$age))
 invlogit(intercept + age_coeff*mean(age_data$age))
-

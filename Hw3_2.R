@@ -14,7 +14,7 @@ set.seed(51)
 data <- read.csv("C:/Users/bilal/Dropbox/MS/Causal Inference/causalinference/beauty.txt")
 beauty_df <- as.data.frame(data)
 
-#View(beauty_df)
+View(beauty_df)
 
 
 #model <- lm(advertising$sales_millions ~ advertising$minutes)

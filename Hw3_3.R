@@ -12,6 +12,11 @@ theme_set(bayesplot::theme_default(base_family = "sans"))
 set.seed(51)
 
 data <- read.csv("C:/Users/bilal/Dropbox/MS/Causal Inference/causalinference/challenger.txt")
+
+C_temp = (data$Temperature - 32 )/2
+
+data = cbind(data, C_temp = C_temp  )
+
 challenger_df <- as.data.frame(data)
 
 fit_1 <- stan_glm(Fail ~ Temperature, family=binomial(link="logit"), data=challenger_df,
@@ -57,3 +62,11 @@ invlogit(-0.99)
 invlogit(-0.99 + 0.5 * 6)
 
 exp(-0.2)
+
+exp(15.74 + -0.24 * 69) / (1 + exp(15.74 + -0.24 * 69)) - exp(15.74 + -0.24 * 70) / (1 + exp(15.74 + -0.24 * 70))
+
+
+#fahrenheit calculation
+fit_c <- stan_glm(Fail ~ challenger_df$C_temp, family=binomial(link="logit"), data=challenger_df,
+                  refresh=0)
+print(fit_c)

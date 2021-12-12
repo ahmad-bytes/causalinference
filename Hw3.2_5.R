@@ -6,7 +6,6 @@ set.seed(51)
 cov <- read.csv("C:/Users/bilal/Dropbox/MS/Causal Inference/causalinference/cov.txt")
 cov_errors <- read.csv("C:/Users/bilal/Dropbox/MS/Causal Inference/causalinference/cov_errors.txt")
 
-
 ## - simulate data
 n = NROW(cov)
 
@@ -16,19 +15,13 @@ transform_X = function(X){
   return(cbind(Y, cov))
 }
 
-no_transform_X = function(){
-  Y = -250 * cov$X1 + 2 * cov$X2 + 0.4 * cov$X3 - 75 * cov$X4 - 100 * cov$Z + cov_errors$x
-  return(cbind(Y, cov))
-}
-
-X.no_transform = no_transform_X() 
-fit_lm = lm(X.no_transform$Y ~ X.no_transform$X1 + X.no_transform$X2 + X.no_transform$X3 + X.no_transform$X4 + X.no_transform$Z)
+transform_X = transform_X() 
+fit_lm = lm(transform_X$Y ~ transform_X$X1 + transform_X$X2 + transform_X$X3 + transform_X$X4 + transform_X$Z)
 summary(fit_lm)
 
-df = as.data.frame(X.no_transform)
+df = as.data.frame(transform_X)
 ate = mean(df$Y[df$Z == 1]) - mean(df$Y[df$Z == 0])
 ate - fit_lm$coefficients[6]
-
 
 ## Now repeat many times to get sampling distribution of ATE
 n.reps = 1000
@@ -38,7 +31,7 @@ for (i in 1:n.reps){
   # - Randomly assing Z
   n0 = round(n/2)
   Z = sample(c(rep(0, n0), rep(1, n-n0)), size = n)
-  Y = -250 * cov$X1 + 2 * cov$X2 + 0.4 * cov$X3 - 75 * cov$X4 - 100 * Z + cov_errors$x
+  Y = -250 * cov$X1 + 2 * cov$X2^2 + 0.4 * cov$X3^3 - 75 * log(cov$X4) - 100 * Z + cov_errors$x
   fit_wrong = lm(Y ~ cov$X1 + cov$X2 + cov$X3 + cov$X4 + Z)
   #- Analyze the data using the "wrong" X
   ATE.wrongmod[i] = fit_wrong$coef["Z"]
@@ -48,9 +41,10 @@ par(mfrow = c(1,1))
 hist(ATE.wrongmod,
      main = paste("Mean = ",round(mean(ATE.wrongmod),2),
                   "SE = ", round(sd(ATE.wrongmod), 2)),
-     breaks = 10)
+     breaks = 20)
 
-
+mean(ATE.wrongmod)
+sd(ATE.wrongmod)
 #' Now repeat the same, but this time analyze the data with the
 #' correct data generating model using X.new
 ATE.correctmod = rep(NA, n.reps)

@@ -14,7 +14,7 @@ data <- read.delim("C:/Users/bilal/Dropbox/MS/Causal Inference/causalinference/a
 
 advertising <- as.data.frame(data)
 
-#View(advertising)
+View(advertising)
 
 
 #model <- lm(advertising$sales_millions ~ advertising$minutes)
