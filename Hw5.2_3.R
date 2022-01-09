@@ -3,6 +3,7 @@ library(BayesTree)
 library(rstanarm)
 library(ggplot2)
 
+
 #'
 #' We'll use the data from the Zigler et al (2018) Impact of Nonattainment Designations 
 #' paper.  Note that the example below may not be a defensible way to analyze these data, but is just 
